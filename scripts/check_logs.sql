@@ -19,3 +19,29 @@ WHERE users.email = :email
 ORDER BY chat_turns.created_at DESC, chat_turns.id DESC
 -- LIMIT: 최대 20건
 LIMIT 20;
+
+
+-- 만료된 세션 삭제
+DELETE FROM auth_sessions
+WHERE expires_at < CURRENT_TIMESTAMP;
+
+
+-- 사용자별 대화 조회
+SELECT user_id, COUNT(*) AS turn_count
+FROM chat_turns
+GROUP BY user_id
+ORDER BY turn_count DESC
+LIMIT 10;
+
+
+-- 대화 상태별 조회
+SELECT status, COUNT(*) AS turn_count
+FROM chat_turns
+GROUP BY status
+ORDER BY turn_count DESC;
+
+
+-- 처리중인 대화 확인
+SELECT *
+FROM chat_turns
+WHERE status = 'pending';

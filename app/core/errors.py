@@ -42,6 +42,7 @@ class ErrorCode(StrEnum):
     AI_UNAVAILABLE = "AI_UNAVAILABLE"
     DB_ERROR = "DB_ERROR"
     AI_TIMEOUT = "AI_TIMEOUT"
+    RATE_LIMIT_EXCEEDED = "RATE_LIMIT_EXCEEDED"
 
 
 class AppError(Exception):
